@@ -15,6 +15,9 @@ class App extends Component {
 
     addTask(e) {
         console.log('adding task');
+        this.setState({
+            tasks: [...this.state.tasks, 'new task!'],
+        });
         e.preventDefault();
     }
 

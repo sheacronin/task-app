@@ -9,9 +9,6 @@ class Overview extends Component {
         return (
             <div id="tasks-container">
                 <ul>
-                    <li>Example Task</li>
-                    <li>Example Task</li>
-                    <li>Example Task</li>
                     {this.props.tasks.map((item, i) => (
                         <li key={i}>{item}</li>
                     ))}
