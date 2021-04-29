@@ -5,6 +5,11 @@ import Overview from './components/Overview';
 class App extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            tasks: ['Task 1', 'Task 2'],
+        };
+
         this.addTask = this.addTask.bind(this);
     }
 
@@ -20,7 +25,7 @@ class App extends Component {
                     <input type="text" />
                     <button onClick={this.addTask}>Submit</button>
                 </form>
-                <Overview />
+                <Overview tasks={this.state.tasks} />
             </main>
         );
     }
