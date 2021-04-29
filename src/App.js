@@ -5,6 +5,12 @@ import Overview from './components/Overview';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.addTask = this.addTask.bind(this);
+    }
+
+    addTask(e) {
+        console.log('adding task');
+        e.preventDefault();
     }
 
     render() {
@@ -12,7 +18,7 @@ class App extends Component {
             <main>
                 <form>
                     <input type="text" />
-                    <button>Submit</button>
+                    <button onClick={this.addTask}>Submit</button>
                 </form>
                 <Overview />
             </main>
