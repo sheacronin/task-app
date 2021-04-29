@@ -7,16 +7,25 @@ class App extends Component {
         super(props);
 
         this.state = {
+            inputValue: '',
             tasks: ['Task 1', 'Task 2'],
         };
 
+        this.handleChange = this.handleChange.bind(this);
         this.addTask = this.addTask.bind(this);
     }
 
-    addTask(e) {
-        console.log('adding task');
+    handleChange(e) {
         this.setState({
-            tasks: [...this.state.tasks, 'new task!'],
+            inputValue: e.target.value,
+        });
+    }
+
+    addTask(e) {
+        console.log('Adding task ' + this.state.inputValue);
+        this.setState({
+            tasks: [...this.state.tasks, this.state.inputValue],
+            inputValue: '',
         });
         e.preventDefault();
     }
@@ -25,7 +34,11 @@ class App extends Component {
         return (
             <main>
                 <form>
-                    <input type="text" />
+                    <input
+                        type="text"
+                        value={this.state.inputValue}
+                        onChange={this.handleChange}
+                    />
                     <button onClick={this.addTask}>Submit</button>
                 </form>
                 <Overview tasks={this.state.tasks} />
