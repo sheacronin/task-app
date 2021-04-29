@@ -32,17 +32,22 @@ class App extends Component {
 
     render() {
         return (
-            <main>
-                <form>
-                    <input
-                        type="text"
-                        value={this.state.inputValue}
-                        onChange={this.handleChange}
-                    />
-                    <button onClick={this.addTask}>Submit</button>
-                </form>
-                <Overview tasks={this.state.tasks} />
-            </main>
+            <div id="app">
+                <header>
+                    <h1>Task List</h1>
+                </header>
+                <main>
+                    <Overview tasks={this.state.tasks} />
+                    <form>
+                        <input
+                            type="text"
+                            value={this.state.inputValue}
+                            onChange={this.handleChange}
+                        />
+                        <button onClick={this.addTask}>Submit</button>
+                    </form>
+                </main>
+            </div>
         );
     }
 }
