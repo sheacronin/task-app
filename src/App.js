@@ -1,31 +1,40 @@
 import './App.css';
 import React, { Component } from 'react';
 import Overview from './components/Overview';
+import uniqid from 'uniqid';
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            inputValue: '',
-            tasks: ['Task 1', 'Task 2'],
+            task: {
+                text: '',
+                id: uniqid(),
+            },
+            tasks: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.addTask = this.addTask.bind(this);
+        this.onTaskSubmit = this.onTaskSubmit.bind(this);
     }
 
     handleChange(e) {
         this.setState({
-            inputValue: e.target.value,
+            task: {
+                text: e.target.value,
+                id: this.state.task.id,
+            },
         });
     }
 
-    addTask(e) {
-        console.log('Adding task ' + this.state.inputValue);
+    onTaskSubmit(e) {
         this.setState({
-            tasks: [...this.state.tasks, this.state.inputValue],
-            inputValue: '',
+            tasks: [...this.state.tasks, this.state.task],
+            task: {
+                text: '',
+                id: uniqid(),
+            },
         });
         e.preventDefault();
     }
@@ -43,10 +52,10 @@ class App extends Component {
                         <input
                             type="text"
                             id="taskInput"
-                            value={this.state.inputValue}
+                            value={this.state.task.text}
                             onChange={this.handleChange}
                         />
-                        <button type="submit" onClick={this.addTask}>
+                        <button type="submit" onClick={this.onTaskSubmit}>
                             Add Task
                         </button>
                     </form>

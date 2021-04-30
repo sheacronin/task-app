@@ -6,8 +6,8 @@ const Overview = (props) => {
     return (
         <div id="tasks-container">
             <ul>
-                {tasks.map((task, i) => (
-                    <li key={i}>{task}</li>
+                {tasks.map((task) => (
+                    <li key={task.id}>{task.text}</li>
                 ))}
             </ul>
         </div>
