@@ -39,8 +39,10 @@ class App extends Component {
                 <main>
                     <Overview tasks={this.state.tasks} />
                     <form>
+                        <label htmlFor="taskInput">Enter a task</label>
                         <input
                             type="text"
+                            id="taskInput"
                             value={this.state.inputValue}
                             onChange={this.handleChange}
                         />

@@ -28,27 +28,36 @@ main {
 }
 
 form {
-    margin-top: 30px;
     width: 90%;
     align-self: center;
     justify-self: center;
-    display: flex;
+    display: grid;
+    grid-template-areas:
+        'label .'
+        'input button';
+    grid-template-rows: 40% 60%;
+    grid-template-columns: 70% 30%;
+}
+
+form label {
+    grid-area: label;
+    align-self: center;
 }
 
 form input {
+    grid-area: input;
     border: none;
     font-size: 20px;
     height: 50px;
-    width: 65%;
     padding-left: 5%;
 }
 
 form button {
+    grid-area: button;
     background-color: #a6be95;
     border: none;
     font-size: 20px;
     height: 50px;
-    width: 30%;
 }
 
 #tasks-container {
