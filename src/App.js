@@ -40,19 +40,20 @@ class App extends Component {
     }
 
     render() {
+        const { tasks, task } = this.state;
         return (
             <div id="app">
                 <header>
                     <h1>Task List</h1>
                 </header>
                 <main>
-                    <Overview tasks={this.state.tasks} />
+                    <Overview tasks={tasks} />
                     <form>
                         <label htmlFor="taskInput">Enter a task:</label>
                         <input
                             type="text"
                             id="taskInput"
-                            value={this.state.task.text}
+                            value={task.text}
                             onChange={this.handleChange}
                         />
                         <button type="submit" onClick={this.onTaskSubmit}>
