@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Overview extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+const Overview = (props) => {
+    const { tasks } = props;
 
-    render() {
-        return (
-            <div id="tasks-container">
-                <ul>
-                    {this.props.tasks.map((item, i) => (
-                        <li key={i}>{item}</li>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
-}
+    return (
+        <div id="tasks-container">
+            <ul>
+                {tasks.map((task, i) => (
+                    <li key={i}>{task}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default Overview;
