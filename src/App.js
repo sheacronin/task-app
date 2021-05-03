@@ -4,8 +4,8 @@ import Overview from './components/Overview';
 import uniqid from 'uniqid';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
             task: {
@@ -14,21 +14,18 @@ class App extends Component {
             },
             tasks: [],
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.onTaskSubmit = this.onTaskSubmit.bind(this);
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({
             task: {
                 text: e.target.value,
                 id: this.state.task.id,
             },
         });
-    }
+    };
 
-    onTaskSubmit(e) {
+    onTaskSubmit = (e) => {
         this.setState({
             tasks: [...this.state.tasks, this.state.task],
             task: {
@@ -37,7 +34,7 @@ class App extends Component {
             },
         });
         e.preventDefault();
-    }
+    };
 
     render() {
         const { tasks, task } = this.state;
