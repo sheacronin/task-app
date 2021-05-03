@@ -75,3 +75,14 @@ form button {
     width: 150px;
     line-height: 30px;
 }
+
+#tasks-container li {
+    position: relative;
+}
+
+.task-num {
+    opacity: 0.4;
+    position: absolute;
+    left: -55px;
+    top: 0;
+}
