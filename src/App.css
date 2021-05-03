@@ -86,3 +86,11 @@ form button {
     left: -55px;
     top: 0;
 }
+
+.delete-task {
+    position: absolute;
+    right: -55px;
+    top: 5px;
+    border: none;
+    background-color: transparent;
+}

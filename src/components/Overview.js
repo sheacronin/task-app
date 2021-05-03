@@ -1,4 +1,5 @@
 import React from 'react';
+import trashIcon from '../i/trash.svg';
 
 const Overview = (props) => {
     const { tasks } = props;
@@ -8,8 +9,11 @@ const Overview = (props) => {
             <ul>
                 {tasks.map((task, i) => (
                     <li key={task.id}>
-                        {task.text}
                         <span className="task-num">{i + 1}</span>
+                        {task.text}
+                        <button className="delete-task">
+                            <img src={trashIcon} alt="trash can icon" />
+                        </button>
                     </li>
                 ))}
             </ul>
