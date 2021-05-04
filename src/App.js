@@ -36,6 +36,12 @@ class App extends Component {
         e.preventDefault();
     };
 
+    removeTask = (id) => {
+        this.setState({
+            tasks: this.state.tasks.filter((task) => task.id !== id),
+        });
+    };
+
     render() {
         const { tasks, task } = this.state;
         return (
@@ -44,7 +50,7 @@ class App extends Component {
                     <h1>Task List</h1>
                 </header>
                 <main>
-                    <Overview tasks={tasks} />
+                    <Overview tasks={tasks} removeTask={this.removeTask} />
                     <form>
                         <label htmlFor="taskInput">Enter a task:</label>
                         <input

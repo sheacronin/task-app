@@ -2,7 +2,7 @@ import React from 'react';
 import trashIcon from '../i/trash.svg';
 
 const Overview = (props) => {
-    const { tasks } = props;
+    const { tasks, removeTask } = props;
 
     return (
         <div id="tasks-container">
@@ -12,7 +12,11 @@ const Overview = (props) => {
                         <span className="task-num">{i + 1}</span>
                         {task.text}
                         <button className="delete-task">
-                            <img src={trashIcon} alt="trash can icon" />
+                            <img
+                                src={trashIcon}
+                                alt="trash can icon"
+                                onClick={() => removeTask(task.id)}
+                            />
                         </button>
                     </li>
                 ))}
