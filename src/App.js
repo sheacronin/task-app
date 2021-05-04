@@ -36,6 +36,18 @@ class App extends Component {
         e.preventDefault();
     };
 
+    onSubmitTaskEdit = (editedTask) => {
+        const { tasks } = this.state;
+        const changingTask = tasks.find((task) => task.id === editedTask.id);
+        const changeIndex = tasks.indexOf(changingTask);
+        const firstPartArray = tasks.slice(0, changeIndex);
+        const secondPartArray = tasks.slice(changeIndex + 1);
+
+        this.setState({
+            tasks: [...firstPartArray, editedTask, ...secondPartArray],
+        });
+    };
+
     removeTask = (id) => {
         this.setState({
             tasks: this.state.tasks.filter((task) => task.id !== id),
@@ -50,7 +62,11 @@ class App extends Component {
                     <h1>Task List</h1>
                 </header>
                 <main>
-                    <Overview tasks={tasks} removeTask={this.removeTask} />
+                    <Overview
+                        tasks={tasks}
+                        removeTask={this.removeTask}
+                        onSubmitTaskEdit={this.onSubmitTaskEdit}
+                    />
                     <form>
                         <label htmlFor="taskInput">Enter a task:</label>
                         <input
