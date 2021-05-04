@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import trashIcon from '../i/trash.svg';
 import editIcon from '../i/edit.svg';
+import submitIcon from '../i/submit.svg';
 
 class Overview extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isEditable: false,
-        };
-    }
-
     makeTaskEditable = () => {
         this.setState({
             isEditable: true,
@@ -37,22 +30,51 @@ class Overview extends Component {
     }
 }
 
-const TaskItem = (props) => {
-    const { task, i, removeTask } = props;
+class TaskItem extends Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <li>
-            <span className="task-num">{i + 1}</span>
-            <span className="task-text">{task.text}</span>
-            <button className="edit-task" onClick={() => console.log('edit')}>
-                <img src={editIcon} alt="pencil edit icon" />
-            </button>
-            <button className="delete-task" onClick={() => removeTask(task.id)}>
-                <img src={trashIcon} alt="trash can icon" />
-            </button>
-        </li>
-    );
-};
+        this.state = {
+            isEditable: false,
+        };
+    }
+
+    handleToggleEditable = () => {
+        this.setState({
+            isEditable: !this.state.isEditable,
+        });
+    };
+
+    render() {
+        const { task, i, removeTask } = this.props;
+
+        return (
+            <li>
+                <span className="task-num">{i + 1}</span>
+                <span className="task-text">{task.text}</span>
+                <button
+                    className="edit-task"
+                    onClick={this.handleToggleEditable}
+                >
+                    <img
+                        src={this.state.isEditable ? submitIcon : editIcon}
+                        alt={
+                            this.state.isEditable
+                                ? 'check mark submit icon'
+                                : 'pencil edit icon'
+                        }
+                    />
+                </button>
+                <button
+                    className="delete-task"
+                    onClick={() => removeTask(task.id)}
+                >
+                    <img src={trashIcon} alt="trash can icon" />
+                </button>
+            </li>
+        );
+    }
+}
 
 // const EditableTaskItem = (props) => {
 //     const { task, i } = props;
