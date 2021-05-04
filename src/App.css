@@ -87,10 +87,19 @@ form button {
     top: 0;
 }
 
+#tasks-container button {
+    border: none;
+    background-color: transparent;
+}
+
+.edit-task {
+    position: absolute;
+    right: -35px;
+    top: 5px;
+}
+
 .delete-task {
     position: absolute;
     right: -55px;
     top: 5px;
-    border: none;
-    background-color: transparent;
 }
