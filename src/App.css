@@ -73,7 +73,8 @@ form button {
 
 #tasks-container ul {
     width: 150px;
-    line-height: 30px;
+    line-height: 35px;
+    list-style: none;
 }
 
 #tasks-container li {
@@ -83,7 +84,7 @@ form button {
 .task-num {
     opacity: 0.4;
     position: absolute;
-    left: -55px;
+    left: -45px;
     top: 0;
 }
 
