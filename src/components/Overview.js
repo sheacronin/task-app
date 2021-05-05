@@ -57,11 +57,11 @@ class TaskItem extends Component {
     };
 
     render() {
-        const { task } = this.state;
+        const { task, isEditable } = this.state;
         const { i, removeTask } = this.props;
 
         let taskText;
-        if (this.state.isEditable) {
+        if (isEditable) {
             taskText = (
                 <input
                     type="text"
@@ -77,19 +77,10 @@ class TaskItem extends Component {
             <li>
                 <span className="task-num">{i + 1}</span>
                 {taskText}
-                <button
-                    className="edit-task"
-                    onClick={this.handleToggleEditable}
-                >
-                    <img
-                        src={this.state.isEditable ? submitIcon : editIcon}
-                        alt={
-                            this.state.isEditable
-                                ? 'check mark submit icon'
-                                : 'pencil edit icon'
-                        }
-                    />
-                </button>
+                <EditButton
+                    handleToggleEditable={this.handleToggleEditable}
+                    isEditable={isEditable}
+                />
                 <button
                     className="delete-task"
                     onClick={() => removeTask(task.id)}
@@ -100,5 +91,18 @@ class TaskItem extends Component {
         );
     }
 }
+
+const EditButton = (props) => {
+    const { handleToggleEditable, isEditable } = props;
+
+    return (
+        <button className="edit-task" onClick={handleToggleEditable}>
+            <img
+                src={isEditable ? submitIcon : editIcon}
+                alt={isEditable ? 'check mark submit icon' : 'pencil edit icon'}
+            />
+        </button>
+    );
+};
 
 export default Overview;
