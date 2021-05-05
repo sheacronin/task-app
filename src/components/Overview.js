@@ -60,28 +60,15 @@ class TaskItem extends Component {
         const { task, isEditable } = this.state;
         const { i, removeTask } = this.props;
 
-        let taskText;
-        if (isEditable) {
-            taskText = (
-                <input
-                    type="text"
-                    value={task.text}
-                    onChange={this.handleChange}
-                    onKeyUp={(e) => {
-                        if (e.key === 'Enter') {
-                            this.handleToggleEditable();
-                        }
-                    }}
-                />
-            );
-        } else {
-            taskText = <span className="task-text">{task.text}</span>;
-        }
-
         return (
             <li>
                 <span className="task-num">{i + 1}</span>
-                {taskText}
+                <TaskText
+                    isEditable={isEditable}
+                    task={task}
+                    handleChange={this.handleChange}
+                    handleToggleEditable={this.handleToggleEditable}
+                />
                 <EditButton
                     handleToggleEditable={this.handleToggleEditable}
                     isEditable={isEditable}
@@ -96,6 +83,27 @@ class TaskItem extends Component {
         );
     }
 }
+
+const TaskText = (props) => {
+    const { isEditable, task, handleChange, handleToggleEditable } = props;
+
+    if (isEditable) {
+        return (
+            <input
+                type="text"
+                value={task.text}
+                onChange={handleChange}
+                onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                        handleToggleEditable();
+                    }
+                }}
+            />
+        );
+    } else {
+        return <span className="task-text">{task.text}</span>;
+    }
+};
 
 const EditButton = (props) => {
     const { handleToggleEditable, isEditable } = props;
