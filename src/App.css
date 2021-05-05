@@ -101,6 +101,20 @@ form button {
     background-color: transparent;
 }
 
+#tasks-container button:hover img {
+    cursor: pointer;
+    animation: buttonWiggle 600ms infinite alternate ease-out;
+}
+
+@keyframes buttonWiggle {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-5px);
+    }
+}
+
 .edit-task {
     position: absolute;
     right: -35px;
