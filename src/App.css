@@ -88,6 +88,14 @@ form button {
     top: 0;
 }
 
+#tasks-container input {
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    outline: 2px solid #a6be95;
+    outline-offset: 5px;
+}
+
 #tasks-container button {
     border: none;
     background-color: transparent;
