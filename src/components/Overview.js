@@ -67,6 +67,11 @@ class TaskItem extends Component {
                     type="text"
                     value={task.text}
                     onChange={this.handleChange}
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter') {
+                            this.handleToggleEditable();
+                        }
+                    }}
                 />
             );
         } else {
