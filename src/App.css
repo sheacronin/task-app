@@ -126,3 +126,9 @@ form button {
     right: -55px;
     top: 5px;
 }
+
+@media (min-width: 450px) {
+    #tasks-container ul {
+        width: 400px;
+    }
+}
