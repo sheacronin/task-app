@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import Overview from './components/Overview';
 import uniqid from 'uniqid';
+import UserInfo from './components/UserInfo';
 
 class App extends Component {
     constructor() {
@@ -60,6 +61,7 @@ class App extends Component {
             <div id="app">
                 <header>
                     <h1>Task List</h1>
+                    <UserInfo />
                 </header>
                 <main>
                     <Overview
