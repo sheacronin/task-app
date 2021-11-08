@@ -1,6 +1,7 @@
 import './UserInfo.css';
 import defaultProfilePic from '../i/default-profile-pic.png';
 import { useEffect, useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 import app from '../firebase';
 import {
     getAuth,
