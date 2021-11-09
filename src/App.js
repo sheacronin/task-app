@@ -16,6 +16,7 @@ import {
     updateDoc,
     doc,
     serverTimestamp,
+    deleteDoc,
 } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 
@@ -61,7 +62,7 @@ const App = () => {
 
     const onTaskSubmit = (e) => {
         try {
-            addDoc(collection(db, `users/${getCurrentUserId()}/tasks`), task);
+            setDoc(doc(db, `users/${getCurrentUserId()}/tasks`, task.id), task);
         } catch (error) {
             console.error('Error writing new task to Firebase Database', error);
         }
@@ -87,11 +88,8 @@ const App = () => {
         });
     };
 
-    //TODO CHANGE
     const removeTask = (id) => {
-        this.setState({
-            tasks: this.state.tasks.filter((task) => task.id !== id),
-        });
+        deleteDoc(doc(db, `users/${getCurrentUserId()}/tasks`, id));
     };
 
     return (
