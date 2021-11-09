@@ -75,17 +75,11 @@ const App = () => {
         e.preventDefault();
     };
 
-    //TODO CHANGE
     const onSubmitTaskEdit = (editedTask) => {
-        const { tasks } = this.state;
-        const changingTask = tasks.find((task) => task.id === editedTask.id);
-        const changeIndex = tasks.indexOf(changingTask);
-        const firstPartArray = tasks.slice(0, changeIndex);
-        const secondPartArray = tasks.slice(changeIndex + 1);
-
-        this.setState({
-            tasks: [...firstPartArray, editedTask, ...secondPartArray],
-        });
+        setDoc(
+            doc(db, `users/${getCurrentUserId()}/tasks`, editedTask.id),
+            editedTask
+        );
     };
 
     const removeTask = (id) => {
