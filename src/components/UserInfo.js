@@ -11,12 +11,8 @@ import {
     signOut,
 } from 'firebase/auth';
 
-const UserInfo = () => {
-    const [currentUser, setCurrentUser] = useState(null);
-
-    useEffect(() => {
-        onAuthStateChanged(getAuth(), setCurrentUser);
-    }, []);
+const UserInfo = (props) => {
+    const { currentUser } = props;
 
     function getUserName() {
         return getAuth().currentUser.displayName;

@@ -17,22 +17,38 @@ import {
     doc,
     serverTimestamp,
 } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
+
+const db = getFirestore();
+
+const getCurrentUserId = () => {
+    return getAuth().currentUser.uid;
+};
 
 const App = () => {
+    const [currentUser, setCurrentUser] = useState(null);
+
+    useEffect(() => {
+        onAuthStateChanged(getAuth(), setCurrentUser);
+    }, []);
+
     const [task, setTask] = useState({ text: '', id: uniqid() });
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        getTasks();
-    }, []);
+        if (!!currentUser) {
+            getTasks();
+        }
+    }, [currentUser]);
 
     const getTasks = () => {
-        const tasksQuery = query(collection(getFirestore(), 'tasks'));
+        const tasksQuery = query(
+            collection(db, `users/${getCurrentUserId()}/tasks`)
+        );
 
         onSnapshot(tasksQuery, (snapshot) => {
             const items = [];
             snapshot.forEach((doc) => items.push(doc.data()));
-            console.log(items);
             setTasks(items);
         });
     };
@@ -45,7 +61,7 @@ const App = () => {
 
     const onTaskSubmit = (e) => {
         try {
-            addDoc(collection(getFirestore(), 'tasks'), task);
+            addDoc(collection(db, `users/${getCurrentUserId()}/tasks`), task);
         } catch (error) {
             console.error('Error writing new task to Firebase Database', error);
         }
@@ -82,27 +98,31 @@ const App = () => {
         <div id="app">
             <header>
                 <h1>Task List</h1>
-                <UserInfo />
+                <UserInfo currentUser={currentUser} />
             </header>
-            <main>
-                <Overview
-                    tasks={tasks}
-                    removeTask={removeTask}
-                    onSubmitTaskEdit={onSubmitTaskEdit}
-                />
-                <form>
-                    <label htmlFor="taskInput">Enter a task:</label>
-                    <input
-                        type="text"
-                        id="taskInput"
-                        value={task.text}
-                        onChange={handleChange}
+            {currentUser ? (
+                <main>
+                    <Overview
+                        tasks={tasks}
+                        removeTask={removeTask}
+                        onSubmitTaskEdit={onSubmitTaskEdit}
                     />
-                    <button type="submit" onClick={onTaskSubmit}>
-                        Add Task
-                    </button>
-                </form>
-            </main>
+                    <form>
+                        <label htmlFor="taskInput">Enter a task:</label>
+                        <input
+                            type="text"
+                            id="taskInput"
+                            value={task.text}
+                            onChange={handleChange}
+                        />
+                        <button type="submit" onClick={onTaskSubmit}>
+                            Add Task
+                        </button>
+                    </form>
+                </main>
+            ) : (
+                <main>Please sign in to add your tasks.</main>
+            )}
         </div>
     );
 };
